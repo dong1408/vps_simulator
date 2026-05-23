@@ -16,3 +16,5 @@ apps/*/.env
 
 dockers/nginx/log/*
 dockers/portainer/data/*
+
+kango_express/
