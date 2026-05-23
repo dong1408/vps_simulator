@@ -1,8 +1,8 @@
 services:
 
   kango-php:
-    # image: ${IMAGE_NAME}
-    image: dongtv1408/kango_express:v1.2.5_6bdebccb
+    image: ${IMAGE_NAME}
+    # image: dongtv1408/kango_express:v1.4.2_7b5475c0
     container_name: kango-php
     restart: unless-stopped
     env_file:
@@ -11,8 +11,17 @@ services:
       - "9000"
     volumes:
       - kango_public:/var/www/kango_express
-      - ./storage:/var/www/kango_express/storage
-      - ./public/uploads:/var/www/kango_express/public/uploads
+      
+      # ## mount đường dẫn tuyệt đối từ host to container đối với case gitlab runner chạy = docker thay vì chạy trực tiếp trên vps, lúc này lệnh docker compos up -d được 
+      # ## phát động từ bên trong container gitlab runner, Docker Engine ngoài máy Host đôi khi không tự suy diễn được dấu ./ này tương ứng với vị trí nào trên ổ đĩa D: vật 
+      # ## lý của Windows nên cần mount tuyệt đối từ host to container đối với case gitlab runner chạy = docker thay vì chạy trực tiếp trên vps.
+      - D:/vps_simulator/apps/kango_express/.env:/var/www/kango_express/.env
+      - D:/vps_simulator/apps/kango_express/storage:/var/www/kango_express/storage
+      - D:/vps_simulator/apps/kango_express/public/uploads:/var/www/kango_express/public/uploads
+
+      # ## mount đường dẫn tương đối từ container to host đối với case gitlab runner chạy trực tiếp trên vps.
+      # - ./storage:/var/www/kango_express/storage
+      # - ./public/uploads:/var/www/kango_express/public/uploads
     networks:
       - proxy-network
       - my-network

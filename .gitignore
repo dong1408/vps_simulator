@@ -15,3 +15,4 @@ apps/*/public/data/*
 apps/*/.env
 
 dockers/nginx/log/*
+dockers/portainer/data/*
