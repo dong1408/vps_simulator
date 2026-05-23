@@ -1,0 +1,17 @@
+data/*
+logs/error.log
+backups/*
+
+apps/*/storage/*
+apps/*/public/uploads/*
+apps/*/public/storage/*
+apps/*/public/framework/*
+apps/*/public/logs/*
+apps/*/public/backups/*
+apps/*/public/data/*
+apps/*/public/logs/*
+apps/*/public/backups/*
+apps/*/public/data/*
+apps/*/.env
+
+dockers/nginx/log/*

@@ -1,0 +1,17 @@
+services:
+
+  mysql:
+    image: mysql:8.0.36
+    container_name: global_mysql
+    restart: unless-stopped
+    environment:
+      TIMEZONE: UTC
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "D:/vps_simulator/data/mysql:/var/lib/mysql"
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true

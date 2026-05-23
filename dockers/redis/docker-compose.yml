@@ -1,0 +1,15 @@
+services:
+  redis:
+    image: redis:7
+    container_name: global_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - D:/vps_simulator/data/redis:/data
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true

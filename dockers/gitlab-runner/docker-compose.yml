@@ -1,0 +1,19 @@
+services:
+
+  gitlab-runner:
+    build:
+      context: .
+    image: gitlab-runner-image
+    container_name: gitlab-runner
+    restart: unless-stopped
+    # user: root
+    volumes:
+      - ./config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+
+      # Mount the docker-compose.yml file from the host to the container (case gitlab runner run directly on vps project)
+      - D:/vps_simulator/apps/kango_express/docker-compose.yml:/var/www/kango_express/docker-compose.yml
+      - D:/vps_simulator/apps/kango_express/.env:/var/www/kango_express/.env
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+

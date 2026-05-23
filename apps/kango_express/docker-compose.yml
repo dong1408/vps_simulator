@@ -1,0 +1,28 @@
+services:
+
+  kango-php:
+    # image: ${IMAGE_NAME}
+    image: dongtv1408/kango_express:v1.2.5_6bdebccb
+    container_name: kango-php
+    restart: unless-stopped
+    env_file:
+      - .env
+    expose:
+      - "9000"
+    volumes:
+      - kango_public:/var/www/kango_express
+      - ./storage:/var/www/kango_express/storage
+      - ./public/uploads:/var/www/kango_express/public/uploads
+    networks:
+      - proxy-network
+      - my-network
+
+networks:
+  proxy-network:
+    external: true
+  my-network:
+    driver: bridge 
+
+volumes:
+  kango_public:
+    external: true

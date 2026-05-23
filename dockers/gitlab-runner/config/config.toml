@@ -1,0 +1,37 @@
+concurrent = 1
+check_interval = 0
+connection_max_age = "15m0s"
+shutdown_timeout = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "gitlab-runner-kango"
+  url = "https://gitlab.com/"
+  id = 53201011
+  token = "glrtr-8WQOO1rbSEolE4odCu8eyWM6MQpvOjEKcDoxY3YxdG4KdDozFA.01.1e0lljcn9"
+  token_obtained_at = 2026-05-16T17:36:50Z
+  token_expires_at = 0001-01-01T00:00:00Z
+  executor = "shell"
+  [runners.cache]
+    MaxUploadedArchiveSize = 0
+    [runners.cache.s3]
+      AssumeRoleMaxConcurrency = 0
+    [runners.cache.gcs]
+    [runners.cache.azure]
+
+[[runners]]
+  name = "runner"
+  url = "https://gitlab.com/"
+  id = 53265382
+  token = "glrtr-a01n8f7BZBfF0rdnKaWQcGM6MQpvOjEKcDoxY3YxdG4KdDozFA.01.1e1icox6u"
+  token_obtained_at = 2026-05-20T17:13:56Z
+  token_expires_at = 0001-01-01T00:00:00Z
+  executor = "shell"
+  [runners.cache]
+    MaxUploadedArchiveSize = 0
+    [runners.cache.s3]
+      AssumeRoleMaxConcurrency = 0
+    [runners.cache.gcs]
+    [runners.cache.azure]

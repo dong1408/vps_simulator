@@ -1,0 +1,25 @@
+services:
+
+  app:
+    image: registry.gitlab.com/company/myapp:latest
+    container_name: myapp_app
+    restart: unless-stopped
+    env_file:
+      - .env
+    expose:
+      - "9000"
+    volumes:
+      - laravel_storage:/var/www/storage
+    networks:
+      - proxy-network
+      - my-network
+
+networks:
+  proxy-network:
+    external: true
+  my-network:
+    driver: bridge 
+
+volumes:
+  laravel_storage:
+  
