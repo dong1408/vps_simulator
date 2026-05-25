@@ -1,4 +1,3 @@
-data/*
 logs/error.log
 backups/*
 
@@ -14,7 +13,9 @@ apps/*/public/backups/*
 apps/*/public/data/*
 apps/*/.env
 
-dockers/nginx/log/*
-dockers/portainer/data/*
+nginx-gateway/log/*
+services-common/volumes/portainer/data/*
+services-common/volumes/mysql/*
+services-common/volumes/gitlab-runner/config/*
 
 kango_express/

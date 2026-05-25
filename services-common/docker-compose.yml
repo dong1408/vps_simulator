@@ -1,0 +1,49 @@
+services:
+
+  mysql:
+    image: mysql:8.0.36
+    container_name: global_mysql
+    restart: unless-stopped
+    environment:
+      TIMEZONE: UTC
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "./volumes/mysql:/var/lib/mysql"
+    networks:
+      - proxy-network
+
+  gitlab-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    image: gitlab-runner-image
+    container_name: gitlab-runner
+    restart: unless-stopped
+    # user: root
+    volumes:
+      - ./volumes/gitlab-runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+
+      # Mount the docker-compose.yml file from the host to the container (case gitlab runner run directly on vps project)
+      - D:/vps_simulator/apps/kango_express/docker-compose.yml:/var/www/kango_express/docker-compose.yml
+      - D:/vps_simulator/apps/kango_express/.env:/var/www/kango_express/.env
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    networks:
+      - proxy-network
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    ports:
+      - "8001:8001"
+      - "9443:9443"
+    restart: unless-stopped
+    volumes:
+      - ./volumes/portainer/data:/data
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    network_mode: bridge
+
+networks:
+  proxy-network:
+    external: true
